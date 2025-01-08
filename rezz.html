@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <title>REBELS</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background-color: #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    nav .menu {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    nav.active .menu {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    nav .menu a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      font-size: 18px;
+      padding: 10px;
+      opacity: 0; 
+      animation: fadeIn 0.5s ease forwards;
+      position: relative;
+    }
+
+    nav .menu a:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    nav .menu a:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    nav .menu a:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    nav .menu a:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+
+    nav .menu a:nth-child(5) {
+      animation-delay: 0.5s;
+    }
+
+    nav .menu a:nth-child(6) {
+      animation-delay: 0.6s;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    nav .menu a:hover {
+      color: #fff;
+      background-color: #007bff;
+      border-radius: 5px;
+      transform: scale(1.05);
+      transition: background-color 0.3s, transform 0.3s ease, color 0.3s;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 30px;
+      height: 4px;
+      background-color: #333;
+      margin: 5px 0;
+      transition: transform 0.3s ease;
+    }
+
+
+    @media (max-width: 768px) {
+      nav .menu {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        background-color: #fff;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transform: translateY(-20px); 
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+    
+      nav.active .menu {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+      }
+    
+      .hamburger {
+        display: flex;
+      }
+    
+      nav .menu a {
+        padding: 12px 20px;
+        text-align: left;
+        width: 100%;
+        opacity: 0;
+        animation: fadeIn 0.5s ease forwards;
+      }
+    
+      nav.active .hamburger div:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+    
+      nav.active .hamburger div:nth-child(2) {
+        opacity: 0;
+      }
+    
+      nav.active .hamburger div:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+    }
+
+    .hero-section {
+      padding-top: 100px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .hero-section h1 {
+      font-size: 30px;
+      color: #333;
+      padding: 0 20px 0 20px;
+    }
+
+    .hero-section p {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 20px;
+      padding: 0 20px 20px 20px;
+      margin-bottom: 50px;
+    }
+
+    .hero-section img {
+      width: 350px;
+      margin-top: 20px;
+      
+    }
+
+    section h1 {
+      background-color: #0099ff;
+      color: #333f;
+      padding: 10px;
+      margin: 0 15px;
+      border-radius: 15px;
+    }
+
+    .product-container {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding: 20px;
+      scroll-behavior: smooth; 
+      background-color: #f9f9f9;
+      margin: 0 15px 20px 15px;
+    }
+
+    .product-card {
+      flex: 0 0 auto;
+      width: 300px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 3px solid #0099ff;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: auto;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .product-card h3 {
+      font-size: 20px;
+      margin: 15px 0;
+      color: #333;
+    }
+
+    .product-card p {
+      font-size: 14px;
+      color: #666;
+      margin: 0 15px 15px;
+    }
+
+    .product-container::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .product-container::-webkit-scrollbar-thumb {
+      background-color: #007bff;
+      border-radius: 4px;
+    }
+
+    .product-container::-webkit-scrollbar-track {
+      background-color: #f1f1f1;
+    }
+
+    .product-card .price-button {
+      display: inline-flex;
+      align-items: center;
+      background-color: #00a2ff;
+      color: white;
+      padding: 15px 30% 15px 30%;
+      border-radius: 15px;
+      text-decoration: none;
+      font-size: 16px;
+      transition: background-color 0.3s;
+      font-weight: bold;
+      margin: 20px 0 20px 0;   
+    }
+
+    .product-card .price-button i {
+      margin-right: 8px;
+    }
+
+    .product-card .price-button:hover {
+      background-color: #015aff;
+    }
+
+    
+    .product-card .price-button:active {
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .spec-list {
+      list-style-type: none;
+      padding-left: 10px;
+      padding-right: 10px;
+      margin: 0;
+      text-align: left;
+    }
+    
+    .spec-list li {
+      margin-bottom: 8px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      border-bottom: 3px solid #00a2ff;
+    }
+
+    .footer {
+      background-color: #333;
+      color: #fff;
+      padding: 20px 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .footer-container {
+      display: flex;
+      align-items: center; 
+      justify-content: center;
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+
+    .footer-logo {
+      flex-shrink: 0;
+      position: relative;
+      top: -25px;
+      margin-left: 10px; 
+    }
+
+    .footer-content {
+      flex: 1;
+    }
+
+    .footer-text {
+      font-size: 14px;
+      margin: 10px 0;
+    }
+
+    .footer-icons a {
+      color: #fff;
+      font-size: 20px;
+      margin: 0 10px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-icons a:hover {
+      color: #1e90ff;
+    }
+
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">REBELS HOSTING</div>
+    <div class="menu">
+      <a href="#home"><i class="fas fa-home"></i> Home</a>
+      <a href="#contac"><i class="fas fa-phone"></i> Contac Me</a>
+      <a href="#apis"><i class="fas fa-database"></i> APIs</a>
+      <a href="https://t.me/rerezz_official"><i class="fas fa-shop"></i> Buy Script</a>
+      <a href="https://t.me/rerezz_official"><i class="fas fa-user"></i> Chat Owner</a>
+      <a href="#"><i class="fas fa-robot"></i> Chat Bot</a>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </nav>
+
+  <div class="hero-section" id="home">
+    <img src="https://pomf2.lain.la/f/dmttw7hp.png" alt="REBELS Bot Image">
+    <h1>Selamat Datang di Website Rebels Hosting</h1>
+    <p>Silahkan scrol ke bawah untuk melihat berbagai produk yang saya sediakan</p>
+  </div>
+
+  <section>
+    <h1>Daftar Produk</h1>
+    <div class="product-container">
+      <div class="product-card">
+        <img src="https://pomf2.lain.la/f/unae7akq.jpg" alt="Produk 1">
+        <h3>Panel 1GB</h3>
+        <ul class="spec-list">
+          <li>RAM : 1GB</li>
+          <li>DSIK : 1GB</li>
+          <li>CPU : 50%</li>
+          <li>AKTIF 30 HARI</li>
+        </ul>
+        <a href="https://example.com/produk3" target="_blank" class="price-button">
+          <i class="fa fa-shopping-cart"></i> Harga &gt;
+        </a>      
+      </div>
+    
+      <div class="product-card">
+        <img src="https://pomf2.lain.la/f/unae7akq.jpg" alt="Produk 1">
+        <h3>Panel 2GB</h3>
+        <ul class="spec-list">
+          <li>RAM : 2GB</li>
+          <li>DSIK : 2GB</li>
+          <li>CPU : 100%</li>
+          <li>AKTIF 30 HARI</li>
+        </ul>
+        <a href="https://pomf2.lain.la/f/unae7akq.jpg" target="_blank" class="price-button">
+          <i class="fa fa-shopping-cart"></i> Harga &gt;
+        </a>      
+      </div>
+    
+      <div class="product-card">
+        <img src="https://pomf2.lain.la/f/unae7akq.jpg" alt="Produk 1">
+        <h3>Panel 3GB</h3>
+        <ul class="spec-list">
+          <li>RAM : 3GB</li>
+          <li>DSIK : 3GB</li>
+          <li>CPU : 150%</li>
+          <li>AKTIF 30 HARI</li>
+        </ul>
+        <a href="https://pomf2.lain.la/f/unae7akq.jpg" target="_blank" class="price-button">
+          <i class="fa fa-shopping-cart"></i> Harga &gt;
+        </a>      
+      </div>
+    
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-logo">
+        <h3>REBELS</h3>
+      </div>
+
+      <div class="footer-content">
+        <p class="footer-text">&copy; 2024 REBELS HOSTING</p>
+        <div class="footer-icons">
+          <a href="https://facebook.com" target="_blank">
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a href="https://twitter.com" target="_blank">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://instagram.com" target="_blank">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>  
+
+  <script>
+    function toggleMenu() {
+      const nav = document.querySelector('nav');
+      nav.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
